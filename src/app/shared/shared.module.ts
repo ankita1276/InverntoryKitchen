@@ -18,7 +18,6 @@ import {  RouterModule } from '@angular/router';
   ],
   exports: [
     SidenavComponent,
-    
   ],
   providers: [],
 })
