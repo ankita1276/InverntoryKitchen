@@ -8,12 +8,24 @@ import { CompletedListComponent } from './corePages/completed-list/completed-lis
 const routes: Routes = [
   {
     path: '',
-    redirectTo: "/KitchenDisplay",
+    redirectTo: '/kitchendisplay',
     pathMatch: 'full'
   },
-  {path:'KitchenDisplay', component: KitchenDisplayComponent},
-  {path:'addItems', component: AddIngredientComponent},
-  {path:'successOrders', component: CompletedListComponent }
+  {
+    path: 'kitchendisplay',
+    loadChildren: () => import('./corePages/kitchen-display/kitchen-display.module').then(m => m.KitchenDisplayModule)
+  },
+
+  {
+    path: 'additems',
+    loadChildren: () => import('./corePages/add-ingredient/add-ingredient.module').then(m => m.AddIngredientModule)
+  },
+
+  {
+    path: 'successorders',
+    loadChildren: () => import('./corePages/completed-list/completed-list.module').then(m => m.CompletedListModule)
+  }
+  
 ];
 
 @NgModule({

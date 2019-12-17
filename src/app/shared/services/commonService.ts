@@ -5,8 +5,8 @@ import { BehaviorSubject } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class CountryListService {
-  endpoint = 'https://restcountries.eu/rest/v2/all';
+export class CommonService {
+  endpoint = 'https://inventroysystem.firebaseio.com';
   countrySpecific = 'https://restcountries.eu/rest/v2/alpha';
   // data: Object;
   private countryDetails = new BehaviorSubject<any>("");
@@ -15,7 +15,9 @@ export class CountryListService {
   constructor(private http: HttpClient) { }
 
   getService() {
-    return this.http.get(this.endpoint);
+    console.log("called  service");
+    
+    return this.http.get(`${this.endpoint}/orders.json`);
   }
   getCountryDetails(code) {
     return this.http.get(`${this.countrySpecific}/${code}`);

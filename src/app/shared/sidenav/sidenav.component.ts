@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CountryListService } from '../services/country-list.service';
+import { CommonService } from '../services/commonService';
 
 
 @Component({
@@ -10,7 +10,7 @@ import { CountryListService } from '../services/country-list.service';
 export class SidenavComponent implements OnInit {
   // countryNames: any;
   // selectedCountry : Object;
-  constructor(private _countryList_: CountryListService) {
+  constructor() {
   }
 
   ngOnInit() {
