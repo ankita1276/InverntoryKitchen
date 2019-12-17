@@ -1,9 +1,9 @@
 <div class="row">
-  <div *ngFor="let orderData of orderData">
+  <div *ngFor="let orderData of orderData let i = index">
     <div class="col-sm-6 col-lg-4">
         <div class="brand-card cardmain">
           <div class="brand-card-header">
-            <h5 class="card-title">{{orderData['product-name']}}</h5>
+            <h5 class="card-title">{{orderData.product_name}}</h5>
           </div>
           <div class="brand-card-body pt-0">
             <div>
@@ -11,11 +11,11 @@
               <div class="text-uppercase text-muted small">Quantity</div>
             </div>
             <div>
-              <div class="text-value">{{orderData.predicted}}</div>
+              <div class="text-value">{{orderData.predicted}} {{i}}</div>
               <div class="text-uppercase text-muted small">Predicted Qty</div>
             </div>
             <div>
-                <a href="#"   [ngClass]="orderData.status == 'N' ? 'btn btn-success':' btn btn-outline-success'">Done</a>
+                <a [ngClass]="orderData.status == 'N' ? 'btn  btn-outline-success':' btn btn-success'" (click)="setStatusDone(i)">Done</a>
               </div>
           </div>
         </div>

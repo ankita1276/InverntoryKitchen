@@ -8,18 +8,25 @@ import { CommonService } from 'src/app/shared/services/commonService';
 })
 export class KitchenDisplayComponent implements OnInit {
 
-  orderData : Object[];
+  orderData: Object[];
 
-  constructor(private _commonService_ : CommonService) { }
+  constructor(private _commonService_: CommonService) { }
 
   ngOnInit() {
-    this._commonService_.getService().subscribe((res)=>{
-      let array = [];
-      Object.keys(res).forEach(element => {array.push(res[element])})
-       console.log(array) 
-       this.orderData =array;
-      console.log(this.orderData,"res");
-    })
+    this.getKitchenListData();
   }
 
+  getKitchenListData() {
+    this._commonService_.getItem().subscribe((res) => {
+      let array = [];
+      Object.keys(res).forEach(element => { array.push(res[element])});
+      console.log(array);
+      this.orderData = array;
+      console.log(this.orderData, 'res');
+    });
+  }
+
+  setStatusDone(selectedIndex){
+    console.log(selectedIndex,"DOnestatuscalled");
+  }
 }

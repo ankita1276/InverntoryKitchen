@@ -1,38 +1,26 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CommonService {
   endpoint = 'https://inventroysystem.firebaseio.com';
-  countrySpecific = 'https://restcountries.eu/rest/v2/alpha';
-  // data: Object;
-  private countryDetails = new BehaviorSubject<any>("");
+  countrySpecific = '';
+
 
 
   constructor(private http: HttpClient) { }
 
-  getService() {
-    console.log("called  service");
-    
+  getItem() {
     return this.http.get(`${this.endpoint}/orders.json`);
   }
-  getCountryDetails(code) {
-    return this.http.get(`${this.countrySpecific}/${code}`);
+  addItem(data) {
+    console.log(data);
+    return this.http.post(`${this.endpoint}/orders.json`,data);
   }
-
-  setSpecificCountryDetails(data: any) {
-    this.countryDetails.next(data);
-  }
-  getSpecificCountryDetails() {
-    return this.countryDetails.asObservable();
-  }
-
-
-  // selectedCountryDetails(data) {
-  //  this.data = data;
+  // updateItem(data) {
+  //   return this.http.update(`${this.endpoint}/orders.json`,data);
   // }
-  
 }
