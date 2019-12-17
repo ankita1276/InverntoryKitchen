@@ -6,7 +6,7 @@
           <i class="fa fa-align-justify"></i> Completed Order Table
         </div>
         <div class="card-body">
-          <table class="table">
+          <table class="table" id="contentToConvert">
             <thead>
               <tr>
                 <th>Dishname</th>
@@ -29,7 +29,7 @@
             </tbody>
           </table>
           <div>
-          <button class="btn btn-success">
+          <button class="btn btn-success" (click)="generatePDF()">
             Download
           </button>
         </div>
