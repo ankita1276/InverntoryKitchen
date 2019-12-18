@@ -2,23 +2,32 @@
   <div *ngFor="let key of obj(orderData)">
     <div class="col-sm-6 col-lg-4">
         <div class="brand-card cardmain">
-          <div class="brand-card-header">
+          <div class="brand-card-header text-center">
             <h5 class="card-title">{{orderData[key].product_name}}</h5>
           </div>
-          <div class="brand-card-body pt-0">
+          <div class="brand-card-body align-middle">
             <div>
               <div class="text-value">{{orderData[key].quantity}}</div>
               <div class="text-uppercase text-muted small">Quantity</div>
             </div>
             <div>
-              <div class="text-value">{{orderData[key].predicted}}</div>
+              <div class="text-value"><span *ngIf="orderData[key].predicted !== ''">{{orderData[key].predicted}}</span><span *ngIf="orderData[key].predicted === ''">-</span></div>
               <div class="text-uppercase text-muted small">Predicted Qty</div>
             </div>
-            <div>
-                <a [ngClass]="orderData.status == 'N' ? 'btn  btn-outline-success':' btn btn-success'" (click)="setStatusDone(key)">Done</a>
+            <div class="mt-1 mb-1">
+                <a class="btn btn-success text-white" (click)="setStatusDone(key)">Done</a>
               </div>
           </div>
         </div>
         </div>
       </div>
+  </div>
+  <div class="card noDataCard" *ngIf="obj(orderData).length === 0">
+    <div class="card-header">
+      No Items Found
+    </div>
+    <div class="card-body">
+      <p class="card-title">Please Add Items from List</p>
+      <a  class="btn btn-primary" routerLinkActive="active" routerLink="/additems">Add</a>
+    </div>
   </div>

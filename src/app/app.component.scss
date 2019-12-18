@@ -1,6 +1,8 @@
-.sidebar{justify-content: center;}
-.containerr{
- 
+.app-body {
+  .sidebar {
+    justify-content: center;
+  }
+  .containerr {
     align-items: center;
     justify-content: center;
     margin-top: 20px;
@@ -9,4 +11,5 @@
     padding-left: 15px;
     margin-right: auto;
     margin-left: auto;
+  }
 }

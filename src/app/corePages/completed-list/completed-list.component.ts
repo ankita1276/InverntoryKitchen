@@ -24,7 +24,7 @@ export class CompletedListComponent implements OnInit {
     html2canvas(document.getElementById('contentToConvert')).then((canvas) => {
       let doc = new jsPDF("l", "mm", "a4");
       let img = canvas.toDataURL("image/png");
-      doc.addImage(img, 'JPEG', 10, 10);
+      doc.addImage(img, 'JPEG',0,0);
       doc.save('orderDetails.pdf');
     });
   }

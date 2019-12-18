@@ -7,7 +7,6 @@ import { BehaviorSubject, Observable } from 'rxjs';
 })
 export class CommonService {
   endpoint = 'https://inventroysystem.firebaseio.com';
-  countrySpecific = '';
 
 
 
@@ -17,14 +16,13 @@ export class CommonService {
     return this.http.get(`${this.endpoint}/orders.json`);
   }
   addItem(data) {
-    console.log(data);
-    return this.http.post(`${this.endpoint}/orders.json`,data);
+    return this.http.post(`${this.endpoint}/orders.json`, data);
   }
-  deleteItem(key){
+  deleteItem(key) {
     return this.http.delete(`${this.endpoint}/orders/${key}.json`);
   }
-  updateItem(key,data){
-    return this.http.put(`${this.endpoint}/orders/${key}.json`,data);
+  updateItem(key, data) {
+    return this.http.put(`${this.endpoint}/orders/${key}.json`, data);
   }
 
 }

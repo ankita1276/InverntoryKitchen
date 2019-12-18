@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonService } from 'src/app/shared/services/commonService';
+import { isEmpty } from 'rxjs/operators';
 
 @Component({
   selector: 'app-kitchen-display',
@@ -8,9 +9,8 @@ import { CommonService } from 'src/app/shared/services/commonService';
 })
 export class KitchenDisplayComponent implements OnInit {
 
-  orderData: any = '';
-  filteredData: any = '';
   obj = Object.keys;
+  orderData: Object;
 
   // tslint:disable-next-line: variable-name
   constructor(private _commonService_: CommonService) { }

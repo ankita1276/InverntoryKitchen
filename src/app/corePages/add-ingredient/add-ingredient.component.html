@@ -1,48 +1,55 @@
-<form>
-  <div class="form-group">
-    <select
-      class="form-control"
-      name="name"
-      [(ngModel)]="addIngredient.product_name"
-      (click)="itemChange($event.target.value)"
-      required
-    >
-      <option value="" disabled selected>Select your option</option>
-      <option *ngFor="let dishName of dishName">{{ dishName }}</option>
-    </select>
+<div class="card">
+  <div class="card-header"><strong>Add Items </strong></div>
+  <div class="card-body">
+    <form class="addForm d-flex justify-content-center">
+      <div class="form-group">
+        <select
+          class="form-control"
+          name="name"
+          [(ngModel)]="addIngredient.product_name"
+          required
+        >
+          <option value="" disabled selected>Select your option</option>
+          <option *ngFor="let dishName of dishName">{{ dishName }}</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <div class="col">
+          <input
+            [(ngModel)]="addIngredient.quantity"
+            name="quantity"
+            type="number"
+            id="Quantity"
+            class="form-control"
+            placeholder="Quantity"
+            required
+          />
+        </div>
+        <div class="col">
+          <input
+            [(ngModel)]="addIngredient.predicted"
+            name="predicted"
+            type="number"
+            class="form-control"
+            placeholder="Predicted Number"
+            required
+          />
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col mt-3">
+          <input
+            type="submit"
+            class="btn btn-primary"
+            type="submit"
+            (click)="onSubmit()"
+            placeholder="Submit form"
+          />
+        </div>
+      </div>
+    </form>
   </div>
-  <div class="form-row">
-    <div class="col">
-      <input
-        [(ngModel)]="addIngredient.quantity"
-        name="quantity"
-        type="number"
-        id="Quantity"
-        class="form-control"
-        placeholder="Quantity"
-        required
-      />
-    </div>
-    <div class="col">
-      <input
-        [(ngModel)]="addIngredient.predicted"
-        name="predicted"
-        type="number"
-        class="form-control"
-        placeholder="Predicted Number"
-        required
-      />
-    </div>
-  </div>
-  <div class="form-row">
-    <div class="col mt-3">
-      <input
-        type="submit"
-        class="btn btn-primary"
-        type="submit"
-        (click)="onSubmit()"
-        placeholder="Submit form"
-      />
-    </div>
-  </div>
-</form>
+</div>
+<div class="alert alert-info w-50" *ngIf ="addAlert" role="alert">
+  {{alertData}}
+</div>

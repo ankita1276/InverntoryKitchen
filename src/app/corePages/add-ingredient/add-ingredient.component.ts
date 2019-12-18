@@ -15,42 +15,28 @@ export class AddIngredientComponent implements OnInit {
     status: 'N',
     created_till_now: ''
   };
-  dishName = ['Vegetarian Lasagne', 'Cheese Rolls', 'Pina Colada Pork Ribs', 'Veg Panner Wrap', 'Chicken Nugget']
-  orderData
+  addAlert: boolean = false;
+  // Option List
+  dishName = ['Vegetarian Lasagne', 'Cheese Rolls', 'Pina Colada Pork Ribs', 'Veg Panner Wrap', 'Chicken Nugget'];
+  alertData: string;
+
   constructor(private _commonService_: CommonService) { }
 
   ngOnInit() {
   }
 
-  itemChange(itemname) {
-    console.log(itemname,"called");
-    this._commonService_.getItem().subscribe((res) => {
-      let array = [];
-      Object.keys(res).forEach(element => { array.push(res[element])});
-      this.orderData = array;
-    });
-    if(this.orderData){
-      this.orderData.filter((item)=>{
-        if(item.product_name === itemname){
-          return item;
-        }
-        this.orderData = item;
-        console.log(this.orderData,"filter");
-        
-      })
-    }
-  
-    // this._countryList_.getCountryDetails(countrycode).subscribe((res) => {
-    //   this.selectedCountry = res;
-    //   this._countryList_.setSpecificCountryDetails(this.selectedCountry);
-    // });
-  }
 
   onSubmit() {
-    this._commonService_.addItem(this.addIngredient).subscribe((res) => {
-      console.log(res);
-    });
-    console.log(this.addIngredient, 'FORM');
+    const sendata: any = this.addIngredient;
+    if (sendata.product_name && sendata.quantity !== '') {
+      this._commonService_.addItem(this.addIngredient).subscribe((res) => {
+        this.alertData = 'Item Added Successfully'
+        this.addAlert = true
+      }, err => console.log('error', err.status));
+    } else {
+      this.alertData = 'Please select Quantity and Name'
+      this.addAlert = true
+    }
   }
 
 
