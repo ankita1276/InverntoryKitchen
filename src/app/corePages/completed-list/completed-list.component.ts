@@ -17,17 +17,15 @@ export class CompletedListComponent implements OnInit {
   ngOnInit() {
     this.getKitchenCompletedData();
   }
-  generatePDF(){
-  html2canvas(document.getElementById('contentToConvert')).then(function(canvas) {
-
-    var doc = new jsPDF();
-    doc.text(5,10,' 1');
-    var img = canvas.toDataURL("image/png");
-    doc.addImage(img, 'JPEG', 10, 10);
-    doc.save('test.pdf');
-  });
-  // doc.save('test.pdf');//fails to add image to pdf
-}
+  generatePDF() {
+    html2canvas(document.getElementById('contentToConvert')).then((canvas) => {
+      var doc = new jsPDF();
+      doc.text(5, 10, ' 1');
+      var img = canvas.toDataURL("image/png");
+      doc.addImage(img, 'JPEG', 10, 10);
+      doc.save('test.pdf');
+    });
+  }
 
   getKitchenCompletedData() {
     this._commonService_.getItem().subscribe((res) => {
