@@ -12,7 +12,7 @@ export class AddIngredientComponent implements OnInit {
     product_name: '',
     quantity: '',
     predicted: '',
-    status: 'Y',
+    status: 'N',
     created_till_now: ''
   };
   dishName = ['Vegetarian Lasagne', 'Cheese Rolls', 'Pina Colada Pork Ribs', 'Veg Panner Wrap', 'Chicken Nugget']

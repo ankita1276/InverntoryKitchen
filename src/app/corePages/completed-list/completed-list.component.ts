@@ -13,6 +13,7 @@ export class CompletedListComponent implements OnInit {
   orderData: Object[];
   constructor(private _commonService_: CommonService) { }
 
+  dishName = ['Vegetarian Lasagne', 'Cheese Rolls', 'Pina Colada Pork Ribs', 'Veg Panner Wrap', 'Chicken Nugget']
 
   ngOnInit() {
     this.getKitchenCompletedData();
@@ -37,5 +38,27 @@ export class CompletedListComponent implements OnInit {
         }
       })
     })
+    // if(this.orderData)
+    // {
+   // this.calcCreatedTillNow();
+    // }
   }
+
+  calcCreatedTillNow() {
+    console.log(this.orderData,"called");
+
+
+    this.orderData.filter((data) => {
+      console.log(data, "datamap");
+
+      const loopDish = this.dishName.map((name) => name)
+      console.log(loopDish, "loopDish");
+      // if(data.product_name === loopDish ) {
+      // return data;
+      // }
+    })
+
+
+  }
+
 }

@@ -20,7 +20,8 @@ export class CommonService {
     console.log(data);
     return this.http.post(`${this.endpoint}/orders.json`,data);
   }
-  // updateItem(data) {
-  //   return this.http.update(`${this.endpoint}/orders.json`,data);
-  // }
+  deleteItem(key){
+    return this.http.delete(`${this.endpoint}/orders/${key}.json`);
+  }
+
 }

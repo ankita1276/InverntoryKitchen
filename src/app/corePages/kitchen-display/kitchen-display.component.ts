@@ -8,8 +8,11 @@ import { CommonService } from 'src/app/shared/services/commonService';
 })
 export class KitchenDisplayComponent implements OnInit {
 
-  orderData: Object[];
+  orderData: any = '';
+  filteredData: any = '';
+  obj = Object.keys;
 
+  // tslint:disable-next-line: variable-name
   constructor(private _commonService_: CommonService) { }
 
   ngOnInit() {
@@ -18,15 +21,30 @@ export class KitchenDisplayComponent implements OnInit {
 
   getKitchenListData() {
     this._commonService_.getItem().subscribe((res) => {
-      let array = [];
-      Object.keys(res).forEach(element => { array.push(res[element])});
-      console.log(array);
-      this.orderData = array;
-      console.log(this.orderData, 'res');
+      this.obj(res).forEach((key) => {
+        if (res[key].status === 'Y') {
+          delete res[key];
+        }
+      });
+      this.orderData = res;
     });
   }
 
-  setStatusDone(selectedIndex){
-    console.log(selectedIndex,"DOnestatuscalled");
+  updateItem(updatedItem) {
+    this._commonService_.addItem(updatedItem).subscribe((res) => {
+      console.log('Updated Successfully');
+    });
+  }
+
+  setStatusDone(selectedIndex) {
+    this.orderData[selectedIndex].status = 'Y';
+    // tslint:disable-next-line: max-line-length
+    this.orderData[selectedIndex].created_till_now = this.orderData[selectedIndex].created_till_now + this.orderData[selectedIndex].quantity;
+    this.orderData[selectedIndex].quantity = 0;
+    this._commonService_.deleteItem(selectedIndex).subscribe((res) => {
+      this.updateItem(this.orderData[selectedIndex]);
+      this.getKitchenListData();
+    });
+
   }
 }
