@@ -1,4 +1,4 @@
-<div *ngIf = "orderData" class="row">
+<div *ngIf = "orderData " class="row">
   <div *ngFor="let key of obj(orderData)">
     <div class="col-sm-6 col-lg-4">
         <div class="brand-card cardmain">
@@ -22,7 +22,7 @@
         </div>
       </div>
   </div>
-  <div class="card noDataCard" *ngIf="obj(orderData).length === 0">
+  <div class="card noDataCard" *ngIf="orderData && obj(orderData) && obj(orderData).length === 0">
     <div class="card-header">
       No Items Found
     </div>
