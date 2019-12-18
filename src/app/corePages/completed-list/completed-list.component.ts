@@ -11,6 +11,7 @@ import jsPDF from 'jspdf';
 })
 export class CompletedListComponent implements OnInit {
   orderData: Object[];
+  updatedOrderedData: any = [];
   constructor(private _commonService_: CommonService) { }
 
   dishName = ['Vegetarian Lasagne', 'Cheese Rolls', 'Pina Colada Pork Ribs', 'Veg Panner Wrap', 'Chicken Nugget']
@@ -18,13 +19,13 @@ export class CompletedListComponent implements OnInit {
   ngOnInit() {
     this.getKitchenCompletedData();
   }
+
   generatePDF() {
     html2canvas(document.getElementById('contentToConvert')).then((canvas) => {
-      var doc = new jsPDF();
-      doc.text(5, 10, ' 1');
-      var img = canvas.toDataURL("image/png");
+      let doc = new jsPDF("l", "mm", "a4");
+      let img = canvas.toDataURL("image/png");
       doc.addImage(img, 'JPEG', 10, 10);
-      doc.save('test.pdf');
+      doc.save('orderDetails.pdf');
     });
   }
 
@@ -37,28 +38,35 @@ export class CompletedListComponent implements OnInit {
           return item;
         }
       })
+      this.calcCreatedTillnow();
     })
-    // if(this.orderData)
-    // {
-   // this.calcCreatedTillNow();
-    // }
   }
 
-  calcCreatedTillNow() {
-    console.log(this.orderData,"called");
+  calcCreatedTillnow() {
+    this.dishName.forEach(name => {
+      let temp = {};
+      let isItemAvialable = false;
+      let calctotalNum = 0
+      let predicted = 0;
+      this.orderData.forEach(item => {
+        if (item['product_name'] === name) {
+          calctotalNum = calctotalNum + parseInt(item['created_till_now'], 10);
+          isItemAvialable = true;
+          if (predicted < item['predicted'])
+            predicted = item['predicted']
+        }
 
-
-    this.orderData.filter((data) => {
-      console.log(data, "datamap");
-
-      const loopDish = this.dishName.map((name) => name)
-      console.log(loopDish, "loopDish");
-      // if(data.product_name === loopDish ) {
-      // return data;
-      // }
+      })
+      if (isItemAvialable) {
+        temp = {
+          created_till_now: calctotalNum,
+          product_name: name,
+          status: "Y",
+          predicted
+        }
+        this.updatedOrderedData.push(temp)
+      }
     })
-
-
   }
 
 }

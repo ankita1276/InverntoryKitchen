@@ -10,20 +10,18 @@
             <thead>
               <tr>
                 <th>Dishname</th>
-                <th>Quantity</th>
                 <th>Created Till Now</th>
                 <th>Predicted</th>
                 <th>Status</th>
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let orderData of orderData">
+              <tr *ngFor="let orderData of updatedOrderedData">
                 <td>{{orderData.product_name}}</td>
-                <td>{{orderData.quantity}}</td>
                 <td>{{orderData.created_till_now}}</td>
                 <td>{{orderData.predicted}}</td>
                 <td>
-                  <span  [ngClass]="orderData.status == 'N' ? 'badge badge-danger':' badge badge-success'">{{orderData.status}}</span>
+                  <span class="badge badge-success">Done</span>
                 </td>
               </tr>
             </tbody>

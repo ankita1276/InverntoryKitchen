@@ -23,5 +23,8 @@ export class CommonService {
   deleteItem(key){
     return this.http.delete(`${this.endpoint}/orders/${key}.json`);
   }
+  updateItem(key,data){
+    return this.http.put(`${this.endpoint}/orders/${key}.json`,data);
+  }
 
 }

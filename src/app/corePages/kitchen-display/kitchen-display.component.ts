@@ -30,19 +30,11 @@ export class KitchenDisplayComponent implements OnInit {
     });
   }
 
-  updateItem(updatedItem) {
-    this._commonService_.addItem(updatedItem).subscribe((res) => {
-      console.log('Updated Successfully');
-    });
-  }
-
   setStatusDone(selectedIndex) {
     this.orderData[selectedIndex].status = 'Y';
     // tslint:disable-next-line: max-line-length
     this.orderData[selectedIndex].created_till_now = this.orderData[selectedIndex].created_till_now + this.orderData[selectedIndex].quantity;
-    this.orderData[selectedIndex].quantity = 0;
-    this._commonService_.deleteItem(selectedIndex).subscribe((res) => {
-      this.updateItem(this.orderData[selectedIndex]);
+    this._commonService_.updateItem(selectedIndex, this.orderData[selectedIndex]).subscribe((res) => {
       this.getKitchenListData();
     });
 
